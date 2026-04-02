@@ -87,7 +87,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
     <!-- The Canvas -->
     <canvas id="myCanvas" width="350" height="250"></canvas>
 
-    <!-- Controls -->
+    <!-- Controls/the buttons -->
     <button onclick="drawRectangle()">Draw Rectangle</button>
     <button onclick="writeName()">Write My Name</button>
     <button onclick="loadImage()">Load Image</button>
@@ -108,30 +108,43 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
         const canvas = document.getElementById("myCanvas");
         return canvas.getContext("2d");
     }
-
+//function to draw a blue rectangle
     function drawRectangle() {
         const ctx = getContext();
         ctx.fillStyle = "blue";
         ctx.fillRect(40, 40, 150, 100);
     }
-
+//function to load my name
     function writeName() {
         const ctx = getContext();
         ctx.font = "24px Arial";
         ctx.fillStyle = "red";
         ctx.fillText("Abi Odu", 70, 200);
     }
+//function to load an image
+	function loadImage() {
+    const ctx = getContext();
+    const img = new Image();
 
-    function loadImage() {
-        const ctx = getContext();
-        const img = new Image();
-        img.onload = function() {
-            ctx.drawImage(img, 25, 25, 300, 180);
-        };
-        // Using the pizza image from your earlier code
-        img.src = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Gift_bow_red.jpg";
-    }
+    // 1. Set the onload handler FIRST
+    img.onload = function() {
+        // Clear previous drawings if you want only the image to show
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        ctx.drawImage(img, 25, 25, 300, 180);
+        console.log("Image loaded successfully!");
+    };
 
+    // 2. Error handling if the link is broken
+    img.onerror = function() {
+        alert("Failed to load image. Check your URL!");
+        console.error("Could not load image at: " + img.src);
+    };
+
+    // 3. Use a direct link to an image file 
+    img.src = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Gift_bow_red.jpg";
+}
+
+//the function to clear the canvas
     function clearCanvas() {
         const canvas = document.getElementById("myCanvas");
         const ctx = canvas.getContext("2d");
