@@ -25,118 +25,69 @@ https://www.w3schools.com/w3css/default.asp
 https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
 -->
 	
-   <head> 
-      <title>Abi's-cute-App6</title>  
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <link rel="stylesheet" href="w3.css">
-      <link rel="stylesheet" href="w3-colors-flat.css">
-   </head> 
+ <!DOCTYPE html>
+<html>
+<head> 
+    <title>Abi's-cute-App6</title>  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="w3-colors-flat.css">
 
-<script>
-var docMod = document.lastModified; // loads last modified time stamp into docMod variable
-alert("This file last modified " + docMod); // generates alert box with time stamp. If annoying, comment out this entire line.
-console.log("This file last modified " + docMod); // generates message in javaScript console (found in developers tools) with time stamp. 
+    <style>
+        body {
+            margin: 0;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
 
-// Get the canvas and its drawing context once
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
+        #content {
+            padding: 20px;
+        }
 
-// Logs the last time this file was saved
-const docMod = document.lastModified;
-console.log("This file last modified: " + docMod);
+        /* Canvas styling */
+        canvas {
+            border: 2px solid black;
+            background-color: white;
+            width: 90vw;
+            max-width: 350px;
+            height: 250px;
+            display: block;
+            margin: 20px auto;
+        }
 
-// Function to draw a blue rectangle
-function drawRectangle() {
-    ctx.fillStyle = "blue";
-    ctx.fillRect(40, 40, 150, 100);
-}
+        button {
+            width: 90%;
+            max-width: 350px;
+            margin: 10px auto;
+            display: block;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-// Function to draw red text
-function writeName(name = "Your Name") {
-    ctx.font = "24px Arial";
-    ctx.fillStyle = "red";
-    // Draws the text at coordinates (x: 50, y: 180)
-    ctx.fillText(name, 50, 180); 
-}
-
-// Loads and draws a pizza image
-function loadImage() {
-    const img = new Image();
-    // Ensure the image is loaded before drawing
-    img.onload = function() {
-        ctx.drawImage(img, 25, 25, 300, 180);
-    };
-    img.src = "https://wikimedia.org";
-}
-
-// Clears everything from the canvas
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-<style>
-    body {
-        margin: 0;
-        text-align: center;
-        font-family: Arial, sans-serif;
-    }
-
-    #content {
-        padding: 20px;
-    }
-
-    /* Canvas sized to fit nicely on a phone screen */
-    canvas {
-        border: 2px solid black;
-        background-color: white;
-        width: 90vw;
-        max-width: 350px;
-        height: 250px;
-        display: block;
-        margin: 20px auto;
-    }
-</style>
-
-</script>
-
-<style>
-    /* Buttons under the canvas */
-    button {
-        width: 90%;
-        max-width: 350px;
-        margin: 8px auto; /* Centering and vertical spacing */
-        display: block;
-        padding: 12px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    footer {
-        margin-top: 20px;
-    }
-</style>
-
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+        }
+    </style>
 </head>
+
 <body>
 
 <div id="header" class="w3-container w3-flat-carrot">
-    <h1>App6 — HTML5-Canvas</h1>
+    <h1>Abi's-cute-App6</h1>
 </div>
 
 <div id="content" class="w3-container">
-    <p>
-        The following code has been developed by students and/or researchers of the 
-        <strong>Freshman Research Initiative DIY Diagnostics Stream</strong> at The University of Texas at Austin. 
-        This code is shared for demonstration purposes and should not be considered a product.
-    </p>
+    <p>The following code has been developed by students/researchers of the <strong>FRI DIY Diagnostics Stream</strong> at UT Austin. This is for demonstration purposes only.</p>
+    
+    <p><strong>WARNING: THIS CODE SHOULD NOT BE USED TO DIAGNOSE MEDICAL CONDITIONS.</strong></p>
 
-    <p><strong>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</strong></p>
-
-    <!-- Canvas with explicit dimensions -->
+    <!-- The Canvas -->
     <canvas id="myCanvas" width="350" height="250"></canvas>
 
-    <!-- Interactive Buttons -->
+    <!-- Controls -->
     <button onclick="drawRectangle()">Draw Rectangle</button>
     <button onclick="writeName()">Write My Name</button>
     <button onclick="loadImage()">Load Image</button>
@@ -144,48 +95,49 @@ function clearCanvas() {
 </div>
 
 <footer class="w3-container w3-flat-carrot">
-    <p>DIY</p>
+    <p>DIY Diagnostics</p>
 </footer>
 
-</body>
-</html>
+<script>
+    // Show the modification date on load
+    const docMod = document.lastModified;
+    console.log("This file last modified: " + docMod);
 
+    // Helper function to get canvas context safely
+    function getContext() {
+        const canvas = document.getElementById("myCanvas");
+        return canvas.getContext("2d");
+    }
 
-<style>	
-.body {
-     margin: 0em;
-}
-.page {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: -100vw;
-    overflow-y: auto;
-    z-index: 0;
-    background-color: hsl(0,0%,100%);
-}
-  .page:target {
-    left: 0vw;
-    z-index: 1;
-}
-</style>
+    function drawRectangle() {
+        const ctx = getContext();
+        ctx.fillStyle = "blue";
+        ctx.fillRect(40, 40, 150, 100);
+    }
 
-<body>
-<div id="header" class="w3-container w3-flat-carrot">
-	<h1>Abi's-cute-App6</h1>
-</div>
-	
-<div id="content" class="w3-container">
-	<p>Content goes here.</p>
-		
-	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
- 	
-	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+    function writeName() {
+        const ctx = getContext();
+        ctx.font = "24px Arial";
+        ctx.fillStyle = "red";
+        ctx.fillText("Nilou Chafi", 70, 200);
+    }
 
-<footer class="w3-bottom w3-container w3-flat-carrot">
-	<p>DIY!</p>
-</footer>
+    function loadImage() {
+        const ctx = getContext();
+        const img = new Image();
+        img.onload = function() {
+            ctx.drawImage(img, 25, 25, 300, 180);
+        };
+        // Using the pizza image from your earlier code
+        img.src = "https://wikimedia.org";
+    }
+
+    function clearCanvas() {
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+</script>
 
 </body>
 </html>
