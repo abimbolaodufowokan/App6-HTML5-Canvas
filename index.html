@@ -123,24 +123,19 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
     }
 //function to load an image
 	function loadImage() {
+    const canvas = document.getElementById("myCanvas"); // ← add this
     const ctx = getContext();
     const img = new Image();
-
-    // 1. Set the onload handler FIRST
     img.onload = function() {
-        // Clear previous drawings if you want only the image to show
-        ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // ← now canvas is defined
         ctx.drawImage(img, 25, 25, 300, 180);
         console.log("Image loaded successfully!");
     };
-
-    // 2. Error handling if the link is broken
     img.onerror = function() {
         alert("Failed to load image. Check your URL!");
         console.error("Could not load image at: " + img.src);
     };
-
-    // 3. Use a direct link to an image file 
+    img.crossOrigin = "anonymous"; // ← helps with CORS on external images
     img.src = "https://clipart-library.com/images_k/gift-bow-transparent/gift-bow-transparent-8.jpg";
 }
 
